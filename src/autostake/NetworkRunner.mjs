@@ -321,8 +321,8 @@ export default class NetworkRunner {
 
   async sendMessages(addresses, messages) {
     try {
-      const execMsg = this.buildExecMessage(this.operator.botAddress, messages)
-      const memo = 'REStaked by ' + this.operator.moniker
+      const moniker = this.operator.moniker || this.network.prettyName || 'AstroStake'
+      const memo = this.opts.memo || ('REStaked by ' + moniker)
       const gasModifier = this.opts.gasModifier
       const gas = await this.signingClient.simulate(this.operator.botAddress, [execMsg], memo, gasModifier);
       const fee = this.signingClient.getFee(gas).amount[0]
