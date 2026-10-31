@@ -4,6 +4,7 @@ scripts/*
 !scripts/base.mjs
 !scripts/checkAuthz.mjs
 !scripts/dryrun.mjs
+!scripts/show-addresses.mjs
 
 # dependencies
 /node_modules

@@ -18,6 +18,7 @@
   },
   "scripts": {
     "dryrun": "node scripts/dryrun.mjs",
-    "autostake": "node scripts/autostake.mjs"
+    "autostake": "node scripts/autostake.mjs",
+    "show-addresses": "node scripts/show-addresses.mjs"
   }
 }
