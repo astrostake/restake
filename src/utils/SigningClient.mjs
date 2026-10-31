@@ -156,7 +156,13 @@ function SigningClient(network, signer) {
       amount: fee.amount,
       gasLimit: fee.gas,
     }, SignMode.SIGN_MODE_DIRECT)
-    const signDoc = makeSignDoc(txBodyBytes, authInfoBytes, chainId, accountNumber);
+    // Use Long.fromString to prevent overflow on 64-bit account numbers (e.g. Epix)
+    const signDoc = {
+      bodyBytes: txBodyBytes,
+      authInfoBytes: authInfoBytes,
+      chainId: chainId,
+      accountNumber: Long.fromString(accountNumber.toString(), true),
+    };
     const { signature, signed } = await signer.signDirect(address, signDoc);
     return {
       bodyBytes: signed.bodyBytes,
@@ -224,7 +230,7 @@ function SigningClient(network, signer) {
               key: signerPubkey,
             }).finish(),
           },
-          sequence: Long.fromNumber(sequence, true),
+          sequence: Long.fromString(sequence.toString(), true),
           modeInfo: { single: { mode: mode } },
         },
       ],

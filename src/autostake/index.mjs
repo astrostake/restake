@@ -119,11 +119,11 @@ export default function Autostake(mnemonic, opts) {
     try {
       await network.load()
     } catch(e) {
-      if(e.response.status === 404){
+      if(e.response?.status === 404){
         failed = true
         throw new Error(`${network.name} not found in Chain Registry`)
       }
-      throw new Error(`Unable to load network data for ${network.name}`)
+      throw new Error(`Unable to load network data for ${network.name}: ${e.message}`)
     }
 
     const logger = mainLogger.child({ chain: network.name })
