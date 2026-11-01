@@ -321,6 +321,7 @@ export default class NetworkRunner {
 
   async sendMessages(addresses, messages) {
     try {
+      const execMsg = this.buildExecMessage(this.operator.botAddress, messages)
       const moniker = this.operator.moniker || this.network.prettyName || 'AstroStake'
       const memo = this.opts.memo || ('REStaked by ' + moniker)
       const gasModifier = this.opts.gasModifier
